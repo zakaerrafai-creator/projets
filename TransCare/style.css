@@ -1,0 +1,254 @@
+/* === TransCare — Style Vert & Blanc (v2 améliorée 2025) === */
+
+/* 🎨 Palette :
+   Vert principal : #2ecc71
+   Vert foncé : #27ae60
+   Rouge alerte : #e74c3c
+   Gris : #333
+*/
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f8fdf9;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Header ===== */
+header {
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+  color: white;
+  text-align: center;
+  padding: 18px 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  border-bottom: 3px solid #2ecc71;
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+#connectedUser {
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+
+/* ===== Écrans ===== */
+.screen {
+  display: none;
+  padding: 20px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Cartes / blocs ===== */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  margin: 25px auto;
+  max-width: 640px;
+  padding: 25px 30px;
+}
+
+.center { text-align: center; }
+
+.card h2 {
+  margin-top: 0;
+  color: #27ae60;
+  font-size: 1.5rem;
+}
+
+/* ===== Boutons ===== */
+button {
+  background: #2ecc71;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin: 6px;
+  box-shadow: 0 2px 6px rgba(46, 204, 113, 0.3);
+}
+
+button:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button.logout {
+  background: #e74c3c;
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3);
+}
+button.logout:hover {
+  background: #c0392b;
+}
+
+/* ===== Inputs ===== */
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 8px 0 14px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+  outline: none;
+}
+
+/* ===== Messages ===== */
+.error {
+  color: #e74c3c;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.hint {
+  color: #888;
+  font-size: 0.9em;
+  margin-top: -5px;
+}
+
+/* ===== Listes ===== */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background: #f1fdf5;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-left: 4px solid #2ecc71;
+  transition: background 0.25s;
+}
+
+li:hover {
+  background: #e9fbf0;
+}
+
+li button {
+  float: right;
+  background: #95a5a6;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+}
+li button:hover {
+  background: #7f8c8d;
+}
+
+/* ===== Carte (Leaflet) ===== */
+#map {
+  height: 360px;
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #27ae60;
+  margin-top: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* ===== Groupes de boutons ===== */
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn-group button {
+  flex: 1 1 45%;
+  min-width: 120px;
+}
+
+/* ===== Section Stock ===== */
+#stockList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ===== Profil ===== */
+#profil input {
+  margin-bottom: 10px;
+}
+#profil h3 {
+  margin-top: 20px;
+  color: #27ae60;
+}
+
+/* ===== À propos ===== */
+.auteurs {
+  list-style: none;
+  padding: 0;
+  font-size: 1.05rem;
+}
+.logo-episen {
+  max-width: 160px;
+  display: block;
+  margin: 20px auto;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  color: #555;
+  padding: 12px 0;
+  margin-top: auto;
+  background: #ecfdf2;
+  border-top: 2px solid #2ecc71;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  header h1 {
+    font-size: 1.15em;
+  }
+
+  .card {
+    margin: 10px;
+    padding: 18px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  #map {
+    height: 280px;
+  }
+}

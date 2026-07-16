@@ -1,0 +1,130 @@
+:root {
+  --bg: #0b1320;
+  --panel: #11223a;
+  --panel-soft: #1a3153;
+  --text: #ecf3ff;
+  --muted: #b9c8df;
+  --accent: #20c997;
+  --accent-2: #ff7a59;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Barlow", sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at 20% 20%, #1a3153 0%, var(--bg) 60%);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+button {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.hero {
+  background: linear-gradient(135deg, rgba(32, 201, 151, 0.18), rgba(255, 122, 89, 0.18));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  animation: rise 0.6s ease-out;
+}
+
+.panel {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: linear-gradient(160deg, var(--panel), var(--panel-soft));
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  animation: rise 0.8s ease-out;
+}
+
+.form-control,
+.form-select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text);
+}
+
+.form-control::placeholder {
+  color: var(--muted);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #05161f;
+  border: none;
+  font-weight: 700;
+}
+
+.btn-accent:hover {
+  filter: brightness(1.08);
+}
+
+.code-box {
+  height: 240px;
+  overflow: auto;
+  white-space: pre-wrap;
+  background: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.8rem;
+  padding: 0.8rem;
+  font-size: 0.8rem;
+  color: #d5f8ef;
+}
+
+.chat-box {
+  height: 240px;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.8rem;
+  padding: 0.8rem;
+}
+
+.chat-line {
+  margin-bottom: 0.45rem;
+  color: var(--muted);
+}
+
+.bg-orb {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(70px);
+  opacity: 0.25;
+  z-index: -1;
+}
+
+.orb-1 {
+  width: 260px;
+  height: 260px;
+  top: -70px;
+  left: -40px;
+  background: #20c997;
+}
+
+.orb-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -90px;
+  right: -60px;
+  background: #ff7a59;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

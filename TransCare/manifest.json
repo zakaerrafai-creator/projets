@@ -1,0 +1,21 @@
+{
+  "name": "TransCare - Livraison Médicale",
+  "short_name": "TransCare",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2ecc71",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/logo_transcare.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/logo_transcare.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

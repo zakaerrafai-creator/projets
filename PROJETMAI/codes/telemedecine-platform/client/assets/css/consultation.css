@@ -1,0 +1,109 @@
+.room-topbar {
+  background: linear-gradient(90deg, var(--panel), var(--panel-soft));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 1rem;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 200, 50, 0.2);
+  color: #ffe06d;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.status-badge.connected {
+  background: rgba(32, 201, 151, 0.2);
+  color: #20c997;
+}
+
+.btn-ctrl {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.btn-ctrl:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--text);
+}
+
+.btn-ctrl.active {
+  background: rgba(255, 122, 89, 0.25);
+  border-color: #ff7a59;
+}
+
+.btn-danger-ctrl {
+  background: linear-gradient(135deg, #e5484d, #c53030);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.3rem 1rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+}
+
+.video-card {
+  position: relative;
+  background: #05101d;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 1rem;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-card-local {
+  aspect-ratio: 4 / 3;
+}
+
+.video-label {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0.8rem;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  color: var(--text);
+}
+
+.chat-panel {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 1rem;
+  padding: 0.8rem;
+}
+
+.chat-panel .chat-box {
+  height: 180px;
+}
+
+.chat-line-me {
+  text-align: right;
+  color: #b8f9e8;
+}
+
+.chat-line-other {
+  text-align: left;
+  color: var(--muted);
+}

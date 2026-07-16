@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeleMed – Consultation Vidéo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/consultation.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <!-- Ecran de connexion -->
+    <div id="joinScreen" class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <div class="card panel p-4">
+            <h1 class="h4 mb-1">Visioconsultation</h1>
+            <p class="text-secondary small mb-4">Rejoignez une salle de consultation sécurisée</p>
+
+            <form id="joinForm" class="vstack gap-3">
+              <div>
+                <label class="form-label small">ID de consultation</label>
+                <input class="form-control" id="consultationId" placeholder="Ex : consult-001" required />
+              </div>
+              <div>
+                <label class="form-label small">Votre nom (affiché)</label>
+                <input class="form-control" id="displayName" placeholder="Dr. Dupont / Alice Martin" required />
+              </div>
+              <button class="btn btn-accent" type="submit">Rejoindre la consultation</button>
+            </form>
+
+            <p class="mt-3 small">
+              <a href="index.html" class="text-secondary">← Retour au tableau de bord</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Salle de consultation vidéo -->
+    <div id="roomScreen" class="container-fluid py-3" hidden>
+      <!-- Barre du haut -->
+      <div class="room-topbar d-flex justify-content-between align-items-center px-4 py-2 mb-3">
+        <div>
+          <span class="fw-bold">TeleMed Vidéo</span>
+          <span id="roomIdLabel" class="badge ms-2" style="background:rgba(255,255,255,0.15)"></span>
+        </div>
+        <div class="d-flex gap-2 align-items-center">
+          <span id="statusBadge" class="status-badge">En attente…</span>
+          <button id="btnMute" class="btn btn-sm btn-ctrl" title="Couper le micro">🎙️</button>
+          <button id="btnCamera" class="btn btn-sm btn-ctrl" title="Activer/désactiver la caméra">📷</button>
+          <button id="btnEnd" class="btn btn-sm btn-danger-ctrl">Terminer</button>
+        </div>
+      </div>
+
+      <!-- Zone vidéo -->
+      <div class="video-grid row g-3 px-3">
+        <div class="col-lg-8">
+          <div class="video-card">
+            <video id="remoteVideo" autoplay playsinline></video>
+            <span class="video-label" id="remoteName">En attente du pair…</span>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="video-card video-card-local">
+            <video id="localVideo" autoplay muted playsinline></video>
+            <span class="video-label" id="localName">Vous</span>
+          </div>
+          <!-- Chat intégré -->
+          <div class="chat-panel mt-3">
+            <div id="chatMessages" class="chat-box"></div>
+            <form id="chatForm" class="d-flex gap-2 mt-2">
+              <input class="form-control form-control-sm" id="chatInput" placeholder="Envoyer un message…" />
+              <button class="btn btn-accent btn-sm" type="submit">▶</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="assets/js/consultation.js"></script>
+  </body>
+</html>

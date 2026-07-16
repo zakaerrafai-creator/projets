@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Métadonnées principales -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TransCare – Drone Médical</title>
+
+  <!-- ✅ PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/logo_transcare.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/logo_transcare.png">
+  <meta name="theme-color" content="#2ecc71">
+
+  <!-- Police moderne -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Leaflet & Chart.js -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>🚁 TransCare – Système de Livraison Médicale</h1>
+    <div id="connectedUser"></div>
+  </header>
+
+  <!-- === Connexion === -->
+  <div id="login" class="screen active card center">
+    <h2>Connexion</h2>
+    <input id="userId" placeholder="Identifiant">
+    <input id="userPass" placeholder="Mot de passe" type="password">
+    <button onclick="login()">Se connecter</button>
+    <p id="loginError" class="error"></p>
+  </div>
+
+  <!-- === Menu principal === -->
+  <div id="menu" class="screen center">
+    <h2>Menu principal</h2>
+    <div class="btn-group">
+      <button onclick="showScreen('faireDemande')">Faire une demande</button>
+      <button onclick="showScreen('historique')">Historique</button>
+      <button onclick="showScreen('profil')">Profil utilisateur</button>
+      <button id="stockBtn" class="admin-only" onclick="showScreen('stock')">Gestion du stock</button>
+      <button id="userBtn" class="admin-only" onclick="showScreen('addUser')">Gestion des utilisateurs</button>
+      <button id="rapportBtn" class="admin-only" onclick="genererPDF()">📄 Rapport PDF</button>
+      <button id="statsBtn" class="admin-only" onclick="showScreen('statistiques')">📊 Statistiques</button>
+      <button onclick="showScreen('apropos')">ℹ️ À propos</button>
+      <button class="logout" onclick="logout()">Se déconnecter</button>
+    </div>
+  </div>
+
+  <!-- === Profil utilisateur === -->
+  <div id="profil" class="screen card">
+    <h2>Mon Profil</h2>
+    <p><strong>Identifiant :</strong> <span id="profilId"></span></p>
+    <p><strong>Rôle :</strong> <span id="profilRole"></span></p>
+    <label>Email :</label>
+    <input id="profilEmail" type="email" placeholder="exemple@hopital.fr">
+    <label>Nouveau mot de passe :</label>
+    <input id="profilPass" type="password" placeholder="••••••••">
+    <button onclick="updateProfil()">💾 Sauvegarder</button>
+
+    <h3>Mes 3 dernières missions</h3>
+    <ul id="profilMissions"></ul>
+
+    <button onclick="showScreen('menu')">⬅️ Retour</button>
+  </div>
+
+  <!-- === Statistiques === -->
+  <div id="statistiques" class="screen card">
+    <h2>📊 Médicaments les plus utilisés</h2>
+    <canvas id="statsChart" width="400" height="300"></canvas>
+    <button onclick="genererStats()">🔄 Actualiser</button>
+    <button onclick="showScreen('menu')">⬅️ Retour</button>
+  </div>
+
+  <!-- === Faire une demande === -->
+  <div id="faireDemande" class="screen card">
+    <h2>Faire une demande</h2>
+    <input type="text" id="searchMed" placeholder="Rechercher un médicament..." oninput="filtrerMedicaments()">
+    <select id="medicament"></select>
+    <input type="number" id="quantite" placeholder="Quantité">
+    <select id="service"></select>
+    <select id="tipoPedido">
+      <option value="normal">Normal</option>
+      <option value="urgent">Urgent</option>
+      <option value="tresUrgent">Très urgent</option>
+    </select>
+    <button onclick="envoyerMission()">Envoyer la demande</button>
+    <button onclick="showScreen('menu')">⬅️ Retour</button>
+  </div>
+
+  <!-- === Historique === -->
+  <div id="historique" class="screen card">
+    <h2>Historique des missions</h2>
+    <p id="deleteNotice" class="hint"></p>
+    <ul id="historiqueList"></ul>
+    <button id="clearHistoriqueBtn" class="admin-only" onclick="viderHistorique()">🧹 Vider l’historique</button>
+    <button onclick="showScreen('menu')">⬅️ Retour</button>
+  </div>
+
+  <!-- === Stock === -->
+  <div id="stock" class="screen card">
+    <h2>Stock des médicaments</h2>
+    <ul id="stockList"></ul>
+    <canvas id="stockChart" width="300" height="300"></canvas>
+    <div class="admin-only stock-controls">
+      <button onclick="afficherStock()">🔄 Actualiser</button>
+      <button onclick="reapprovisionnementAuto()">🚚 Réapprovisionnement (simulation)</button>
+    </div>
+    <button onclick="showScreen('menu')">⬅️ Retour</button>
+  </div>
+
+  <!-- === Gestion utilisateurs === -->
+  <div id="addUser" class="screen card">
+    <h2>Gestion des utilisateurs</h2>
+    <input id="newId" placeholder="Identifiant">
+    <input id="newPass" placeholder="Mot de passe" type="password">
+    <select id="newRole">
+      <option value="medecin">Médecin</option>
+      <option value="infirmier">Infirmier</option>
+      <option value="admin">Admin</option>
+    </select>
+    <button onclick="addUser()">Créer utilisateur</button>
+    <h3>Liste des utilisateurs</h3>
+    <ul id="listeUtilisateurs"></ul>
+    <button onclick="afficherUtilisateurs()">🔄 Actualiser</button>
+    <button onclick="showScreen('menu')">⬅️ Retour</button>
+  </div>
+
+  <!-- === Suivi du drone === -->
+  <div id="suivi" class="screen card">
+    <h2>Suivi du drone</h2>
+    <div id="map"></div>
+    <p id="suiviStatus">En attente de mission...</p>
+    <button id="btnSimu" onclick="toggleSimulation()">▶️ Lancer la simulation</button>
+    <button onclick="showScreen('menu')">⬅️ Retour</button>
+  </div>
+
+  <!-- === À propos === -->
+  <div id="apropos" class="screen card center">
+    <h2>À propos</h2>
+    <p><strong>Réalisé par :</strong></p>
+    <ul class="auteurs">
+      <li>Zakaria Errafai Gnani</li>
+      <li>Asmaa Mimouni</li>
+      <li>Abdel-aziz Youssouf Youssouf</li>
+      <li>Soundous Bellafkih</li>
+    </ul>
+    <img src="./icons/EPISEN.png" alt="Logo EPISEN" class="logo-episen">
+    <button onclick="showScreen('menu')">⬅️ Retour</button>
+  </div>
+
+  <footer>© 2025 TransCare – Prototype médical</footer>
+
+  <!-- Librairies PDFMake -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- App principale -->
+  <script type="module" src="./app.js"></script>
+
+  <!-- Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("service-worker.js")
+        .then(() => console.log("✅ Service Worker enregistré"))
+        .catch(err => console.error("❌ SW erreur:", err));
+    }
+  </script>
+</body>
+</html>
