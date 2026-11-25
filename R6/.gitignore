@@ -1,0 +1,9 @@
+data/*
+!data/*.py
+results/processed/
+results/processed/
+results/*.npz.vscode/
+*.edf
+*.mat
+*.npz
+results/processed/
